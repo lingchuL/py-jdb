@@ -1,4 +1,4 @@
-# py-jdb
+# jdbl
 A json based database library, RAM running and including basic read-write lock.
 
 TODO:
@@ -9,7 +9,7 @@ TODO:
 `jdb` means json based database, but with some fixed structure.
 
 ## database & table
-py-jdb made its own file format, `.jdb`.
+jdbl made its own file format, `.jdb`.
 
 A `.jdb` file's data is a database(db) itself. Its each key is a table(tb) name, and the value is a table data.
 
@@ -62,11 +62,11 @@ Each attribute name would have a corresponding column info in `columns`. As you 
 ### columns
 `columns` is a list of column infos, it is a list of dict too. Each column info is a dict, with column's info name as key, and column's info value as value.
 
-There're two fixed info names are fixed.
+There are two fixed info names are fixed.
 - `name`: the name of the column.
 - `rname`: the readable name of the column.
 
-And any other info names are custom info names, you can define them by yourself. The py-jdb library would make sure that every row data atttribute name is in the `columns` list.
+And any other info names are custom info names, you can define them by yourself. The jdbl library would make sure that every row data attribute name is in the `columns` list.
 
 Seems like this:
 ```json
@@ -80,20 +80,20 @@ Seems like this:
 ```
 
 # How to use
-This `py-jdb` library helps handle `.jdb` file, and it provides some functions to operate the database.
+This `jdbl` library helps handle `.jdb` file, and it provides some functions to operate the database.
 
 ## install & import
 You can install it by pip:
 ```
-pip install py-jdb
+pip install jdbl
 ```
 And import it:
 ```python
-from py-jdb import jdb_handler
+from jdbl import jdb_handler
 ```
 
 ## Lock & Unlock
-In order to avoid data corruption for multi-threaded, multi-processed environment, `py-jdb` provides read-write lock directly. It means when you used(read or write) one jdb file, the file would be locked up.
+In order to avoid data corruption for multi-threaded, multi-processed environment, `jdbl` provides read-write lock directly. It means when you used(read or write) one jdb file, the file would be locked up.
 To make the api more readable, the function is named `use` and `un_use`.
 
 ### use & un_use
@@ -110,7 +110,7 @@ jdb_handler.un_use("db1.jdb")
 When you use a jdb, you should make sure that you unlock it after you finish using it. Otherwise next time you use the same jdb, it would be block for five seconds and print a warning.
 
 ## Query Datas
-As it is a json format with fixed structure, you can use `json` library to get datas directly. But `py-jdb` provides some functions to make it more readable.
+As it is a json format with fixed structure, you can use `json` library to get datas directly. But `jdbl` provides some functions to make it more readable.
 
 ### get_tb_data
 `get_tb_data` function is used to get the table data of a table.
@@ -128,7 +128,7 @@ rows = jdb_handler.query_rows("db1", "tb1", "name", "Alice")
 This would return a list of row data dict that with `name` attribute value is "Alice".
 
 ## Write Datas
-As it is a json format with fixed structure, you can use `json` library to write datas directly. But `py-jdb` provides some functions to make it more readable.
+As it is a json format with fixed structure, you can use `json` library to write datas directly. But `jdbl` provides some functions to make it more readable.
 
 ### add_rows
 `add_rows` function is used to add rows to a table. And it has upsert mode. Which would just update the row if it exists, or add the row if it doesn't exist.
@@ -145,7 +145,7 @@ jdb_handler.add_rows("db1", "tb1", row_datas, "name", upsert_mode=True)
 This would add the rows to `tb1` table in `db1` database. If the row with `name` attribute value is "Alice" exists, it would be updated. Otherwise it would be added.
 
 ## One-time functions
-As said above, normally you need to `use` a jdb and do something with it, then you need to `un_use` it. It is for fast RAM running when you need to do many operations to one jdb. But for some one time operation like "reading the table and do nothing else", the use-do-un_use steps are a little bit annoying. So `py-jdb` provides some one-time functions to make it more convenient.
+As said above, normally you need to `use` a jdb and do something with it, then you need to `un_use` it. It is for fast RAM running when you need to do many operations to one jdb. But for some one time operation like "reading the table and do nothing else", the use-do-un_use steps are a little bit annoying. So `jdbl` provides some one-time functions to make it more convenient.
 
 Here're some one-time functions like:
 - `get_tb_data_once`

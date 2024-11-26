@@ -1,7 +1,7 @@
 import os
 from appdirs import AppDirs
 
-from log_handle import SupLogger
+from .log_handle import SupLogger
 
 
 class UtilUtils(object):

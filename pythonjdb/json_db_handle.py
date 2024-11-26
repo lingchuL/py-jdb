@@ -3,9 +3,9 @@ import json
 import uuid
 import time
 
-from util_utils import UtilUtils, DirFileUtils
+from .util_utils import UtilUtils, DirFileUtils
 
-from log_handle import SupLogger
+from .log_handle import SupLogger
 
 
 class BatchQueryResult(object):
