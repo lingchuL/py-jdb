@@ -101,10 +101,10 @@ To make the api more readable, the function is named `use` and `un_use`.
 
 ```python
 # lock the jdb file
-jdb_handler.use("db1.jdb")
+jdb_handler.use("db1")
 
 # unlock the jdb file
-jdb_handler.un_use("db1.jdb")
+jdb_handler.un_use("db1")
 ```
 
 When you use a jdb, you should make sure that you unlock it after you finish using it. Otherwise next time you use the same jdb, it would be block for five seconds and print a warning.
