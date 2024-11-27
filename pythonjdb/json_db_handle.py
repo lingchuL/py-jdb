@@ -326,7 +326,7 @@ class JDBHandler(object):
 		row_datas = tb_data.get("rows") if tb_data else []
 		if not row_datas:
 			return []
-		return [row for row in row_datas if (col_name in row and str(row[col_name]) and str(row[col_name]) in str(col_value))]
+		return [row for row in row_datas if (col_name in row and str(row[col_name]) and str(row[col_name]) == str(col_value))]
 
 	def query_rows_filter_mode(self, db_name, tb_name, col_name, col_value, db_dir=None):
 		"""
